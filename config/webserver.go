@@ -9,5 +9,6 @@ import (
 
 func StartServer() {
     http.HandleFunc("/", controllers.ErrorsController)
+
     log.Fatal(http.ListenAndServe(":8080", nil))
 }
