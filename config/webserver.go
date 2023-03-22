@@ -4,7 +4,7 @@ import (
     "log"
     "net/http"
 
-    controllers "go_error_tracker/controllers"
+    "go_error_tracker/controllers"
 )
 
 func StartServer() {
