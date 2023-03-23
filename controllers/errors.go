@@ -7,7 +7,7 @@ import (
     "go_error_tracker/interfaces"
 )
 
-func ErrorsController(response_writter http.ResponseWriter, r *http.Request) {
+func ErrorsController(response_writter http.ResponseWriter, request *http.Request) {
     error := interfaces.Error {
         Name: "Application Error",
         StackTrace: "You're application error stack_trace",
