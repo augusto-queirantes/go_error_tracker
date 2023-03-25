@@ -5,7 +5,8 @@ This is a study application that wants to mock a simple error tracker usgin go a
 # Setup
 
 ```
-make up
+make config
+make build
 mkae setup
 ```
 
@@ -14,6 +15,8 @@ mkae setup
 ## Server
 
 ```
+make up
+
 make sh
 
 go run main.go

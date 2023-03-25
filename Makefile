@@ -1,3 +1,6 @@
+build:
+	docker compose up -d --build
+
 up:
 	docker compose up -d --build
 
@@ -6,6 +9,9 @@ down:
 
 setup:
 	@./scripts/setup.sh
+
+config_database:
+	@./scripts/database_configuration.sh
 
 sh:
 	docker exec -it app sh
