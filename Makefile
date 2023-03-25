@@ -17,4 +17,4 @@ sh:
 	docker exec -it app sh
 
 db:
-	docker exec -it database psql -U user -w
+	docker exec -it database psql -U user -w -d error_tracker

@@ -9,6 +9,8 @@ services:
       - "8080:8080"
     volumes:
       - .:/app
+    networks:
+      - application_network
 
   postgres:
     image: postgres:14.5-alpine
@@ -21,6 +23,12 @@ services:
       - postgres:/data/postgres
     ports:
       - "5432:5432"
+    networks:
+      - application_network
+
+networks:
+  application_network:
+    driver: bridge
 
 volumes:
   postgres:
