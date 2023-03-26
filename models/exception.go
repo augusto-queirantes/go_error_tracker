@@ -4,7 +4,7 @@ import (
     "gorm.io/gorm"
 )
 
-type Error struct {
+type Exception struct {
     gorm.Model
 
     Name string `gorm:"uniqueIndex;not null"`

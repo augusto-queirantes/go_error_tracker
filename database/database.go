@@ -35,7 +35,7 @@ func Connect() {
 }
 
 func Migrate() {
-    Database.AutoMigrate(&models.Error{})
+    Database.AutoMigrate(&models.Exception{})
 
     fmt.Println("Database successfully migrated")
 }

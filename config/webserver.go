@@ -9,8 +9,8 @@ import (
 func StartServer() {
     router := gin.Default()
 
-    router.GET("/errors", controllers.GetErrors)
-    router.POST("/errors", controllers.CreateError)
+    router.GET("/exceptions", controllers.GetExceptions)
+    router.POST("/exceptions", controllers.CreateException)
 
     router.Run()
 }
