@@ -1,9 +1,11 @@
 package config
 
 import (
-    "github.com/gin-gonic/gin"
+	"log"
 
-    "go_error_tracker/controllers"
+	"github.com/gin-gonic/gin"
+
+	"go_error_tracker/controllers"
 )
 
 func StartServer() {
@@ -14,5 +16,9 @@ func StartServer() {
     router.GET("/applications", controllers.GetApplications)
     router.POST("/applications", controllers.CreateApplication)
 
-    router.Run()
+    err := router.Run()
+
+    if err != nil {
+        log.Fatal(err)
+    }
 }

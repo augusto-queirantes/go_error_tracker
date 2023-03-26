@@ -35,7 +35,11 @@ func Connect() {
 }
 
 func Migrate() {
-    Database.AutoMigrate(&models.Exception{}, &models.Application{})
+    err := Database.AutoMigrate(&models.Exception{}, &models.Application{})
+
+    if err != nil {
+        log.Fatal(err)
+    }
 
     fmt.Println("Database successfully migrated")
 }
