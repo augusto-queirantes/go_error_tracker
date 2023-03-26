@@ -18,3 +18,6 @@ sh:
 
 db:
 	docker exec -it database psql -U user -w -d error_tracker
+
+dbsh:
+	docker exec -it database sh
