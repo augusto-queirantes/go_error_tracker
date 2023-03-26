@@ -19,5 +19,15 @@ make up
 
 make sh
 
-go run main.go
+air
+```
+
+## Linter
+
+```
+make up
+
+make sh
+
+golangci-lint run
 ```
