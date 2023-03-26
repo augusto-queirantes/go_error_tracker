@@ -1,14 +1,16 @@
 package config
 
 import (
-    "log"
-    "net/http"
+    "github.com/gin-gonic/gin"
 
     "go_error_tracker/controllers"
 )
 
 func StartServer() {
-    http.HandleFunc("/", controllers.ErrorsController)
+    router := gin.Default()
 
-    log.Fatal(http.ListenAndServe(":8080", nil))
+    router.GET("/errors", controllers.GetErrors)
+    router.POST("/errors", controllers.CreateError)
+
+    router.Run()
 }

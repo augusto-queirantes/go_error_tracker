@@ -2,12 +2,13 @@ package main
 
 import (
     "go_error_tracker/config"
+    "go_error_tracker/database"
 )
 
 func init() {
     config.LoadEnvs()
-    config.Connect()
-    config.Migrate()
+    database.Connect()
+    database.Migrate()
 }
 
 func main() {
