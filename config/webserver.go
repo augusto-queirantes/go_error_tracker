@@ -11,6 +11,8 @@ func StartServer() {
 
     router.GET("/exceptions", controllers.GetExceptions)
     router.POST("/exceptions", controllers.CreateException)
+    router.GET("/applications", controllers.GetApplications)
+    router.POST("/applications", controllers.CreateApplication)
 
     router.Run()
 }
