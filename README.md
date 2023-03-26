@@ -16,9 +16,7 @@ mkae setup
 
 ```
 make up
-
 make sh
-
 air
 ```
 
@@ -26,8 +24,6 @@ air
 
 ```
 make up
-
 make sh
-
 golangci-lint run
 ```
