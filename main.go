@@ -7,8 +7,10 @@ import (
 
 func init() {
     config.LoadEnvs()
-    database.Connect()
-    database.Migrate()
+
+    database_connection := database.Connect()
+
+    database.Migrate(database_connection)
 }
 
 func main() {

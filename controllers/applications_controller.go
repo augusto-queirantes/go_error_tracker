@@ -6,13 +6,13 @@ import (
     "github.com/gin-gonic/gin"
 
     "go_error_tracker/database"
-    "go_error_tracker/models"
+    "go_error_tracker/repositories"
 )
 
 func GetApplications(context *gin.Context) {
-    var applications []models.Application
-
-    database.Database.Find(&applications)
+    database := database.Connect()
+    application_repository := repositories.ApplicationRepository{Client: database}
+    applications := application_repository.FindAll()
 
     context.JSON(http.StatusOK, gin.H{"data": applications})
 }
@@ -30,9 +30,10 @@ func CreateApplication(context *gin.Context) {
         return
     }
 
-    application := models.Application{Name: input.Name}
+    database := database.Connect()
+    application_repository := repositories.ApplicationRepository{Client: database}
 
-    database.Database.Create(&application)
+    application := application_repository.Create(input.Name)
 
     context.JSON(http.StatusOK, gin.H{"data": application})
 }

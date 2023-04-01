@@ -11,10 +11,13 @@ import (
     "gorm.io/gorm"
 )
 
-var Database *gorm.DB
+type Database struct {
+    Postgres *gorm.DB
+}
 
-func Connect() {
+func Connect() *Database {
     var err error
+    var database_client *gorm.DB
 
     dsn := fmt.Sprintf(
         "host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=America/Sao_Paulo",
@@ -25,17 +28,21 @@ func Connect() {
         os.Getenv("POSTGRES_PORT"),
     )
 
-    Database, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+    database_client, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
     if err != nil {
         log.Fatal("Failed to connect to the Database")
     }
 
     fmt.Println("Database successfully connected")
+
+    return &Database{
+        Postgres: database_client,
+    }
 }
 
-func Migrate() {
-    err := Database.AutoMigrate(&models.Exception{}, &models.Application{})
+func Migrate(database_connection *Database) {
+    err := database_connection.Postgres.AutoMigrate(&models.Exception{}, &models.Application{})
 
     if err != nil {
         log.Fatal(err)

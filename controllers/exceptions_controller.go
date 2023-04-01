@@ -6,13 +6,13 @@ import (
     "github.com/gin-gonic/gin"
 
     "go_error_tracker/database"
-    "go_error_tracker/models"
+    "go_error_tracker/repositories"
 )
 
 func GetExceptions(context *gin.Context) {
-    var exceptions []models.Exception
-
-    database.Database.Find(&exceptions)
+    database := database.Connect()
+    exception_repository  := repositories.ExceptionRepository{Client: database}
+    exceptions := exception_repository.FindAll()
 
     context.JSON(http.StatusOK, gin.H{"data": exceptions})
 }
@@ -31,9 +31,11 @@ func CreateException(context *gin.Context) {
         return
     }
 
-    exception := models.Exception{Name: input.Name, StackTrace: input.StackTrace}
 
-    database.Database.Create(&exception)
+    database := database.Connect()
+    exception_repository := repositories.ExceptionRepository{Client: database}
+    exception := exception_repository.Create(input.Name, input.StackTrace)
+
 
     context.JSON(http.StatusOK, gin.H{"data": exception})
 }
