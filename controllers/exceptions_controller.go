@@ -1,12 +1,12 @@
 package controllers
 
 import (
-    "net/http"
+	"net/http"
 
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 
-    "go_error_tracker/database"
-    "go_error_tracker/repositories"
+	"go_error_tracker/database"
+	"go_error_tracker/repositories"
 )
 
 func GetExceptions(context *gin.Context) {
@@ -18,8 +18,8 @@ func GetExceptions(context *gin.Context) {
 }
 
 type CreateExceptionInput struct {
-    Name string `json:"exception_name" binding:"required"`
-    StackTrace string `json:"exception_stack_trace" binding:"required"`
+    Name string `json:"name" binding:"required"`
+    StackTrace string `json:"stack_trace" binding:"required"`
     ApplicationName string `json:"application_name" binding:"required"`
 }
 
@@ -34,7 +34,7 @@ func CreateException(context *gin.Context) {
 
     database := database.Connect()
     exception_repository := repositories.ExceptionRepository{Client: database}
-    exception := exception_repository.Create(input.Name, input.StackTrace)
+    exception := exception_repository.Create(input.Name, input.StackTrace, input.ApplicationName)
 
     context.JSON(http.StatusOK, gin.H{"data": exception})
 }
