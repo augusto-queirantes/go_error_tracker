@@ -24,3 +24,11 @@ func (application_repository ApplicationRepository) FindAll() []models.Applicati
 
     return applications
 }
+
+func (application_repository ApplicationRepository) FindByName(name string) models.Application {
+    var application models.Application
+
+    application_repository.Client.Postgres.Where(models.Application{Name: name}).First(&application)
+
+    return application
+}

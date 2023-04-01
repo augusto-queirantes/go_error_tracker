@@ -20,6 +20,7 @@ func GetExceptions(context *gin.Context) {
 type CreateExceptionInput struct {
     Name string `json:"exception_name" binding:"required"`
     StackTrace string `json:"exception_stack_trace" binding:"required"`
+    ApplicationName string `json:"application_name" binding:"required"`
 }
 
 func CreateException(context *gin.Context) {
@@ -31,11 +32,9 @@ func CreateException(context *gin.Context) {
         return
     }
 
-
     database := database.Connect()
     exception_repository := repositories.ExceptionRepository{Client: database}
     exception := exception_repository.Create(input.Name, input.StackTrace)
-
 
     context.JSON(http.StatusOK, gin.H{"data": exception})
 }

@@ -37,3 +37,24 @@ func CreateApplication(context *gin.Context) {
 
     context.JSON(http.StatusOK, gin.H{"data": application})
 }
+
+type FindApplicationInput struct {
+    Name string `json:"name"`
+}
+
+func GetApplication(context *gin.Context) {
+    var input FindApplicationInput
+
+    if err := context.ShouldBindJSON(&input); err != nil {
+        context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+
+        return
+    }
+
+    database := database.Connect()
+    application_repository := repositories.ApplicationRepository{Client: database}
+
+    application := application_repository.FindByName(input.Name)
+
+    context.JSON(http.StatusOK, gin.H{"data": application})
+}
